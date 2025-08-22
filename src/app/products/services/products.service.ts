@@ -31,6 +31,12 @@ export class ProductsService {
         return this.http.get<ProductsResponse[]>(`${API}/products/get_by_category/${id}`);
     }
 
+    search(nombre:string){
+        return this.http.get<ProductsResponse[]>(`http://localhost:8000/products/get_by_filters`,{
+            params:{nombre}
+        })
+    }
+
 
 
 }

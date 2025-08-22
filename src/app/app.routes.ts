@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { HomePageComponent } from './store-front/pages/home-page/home-page.component';
 import { CategoriesPageComponent } from './store-front/pages/categories-page/categories-page.component';
 import { CategoryPageComponent } from './store-front/pages/category-page/category-page.component';
+import { ProductPageComponent } from './store-front/pages/product-page/product-page.component';
 
 export const routes: Routes = [
 
@@ -16,6 +17,10 @@ export const routes: Routes = [
     {
         path:'category/:id',
         component:CategoryPageComponent
+    },
+    {
+        path:'products/:value',
+        component:ProductPageComponent
     },
     {
         path:"**",
