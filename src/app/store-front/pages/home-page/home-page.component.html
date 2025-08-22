@@ -1,22 +1,44 @@
-<table class="min-w-full border-collapse border border-gray-300 ">
-  <thead>
-    <tr class="bg-gray-100">
-      <th class="border border-gray-300 px-4 py-2 text-left">ID</th>
-      <th class="border border-gray-300 px-4 py-2 text-left">Nombre</th>
-      <th class="border border-gray-300 px-4 py-2 text-left">Descripción</th>
-      <th class="border border-gray-300 px-4 py-2 text-left">Precio</th>
-      <th class="border border-gray-300 px-4 py-2 text-left">Categoria</th>
-    </tr>
-  </thead>
-  <tbody>
-    @for (item of values(); track item.id) {
-      <tr class="hover:bg-gray-50">
-        <td class="border border-gray-300 px-4 py-2">{{ item.id }}</td>
-        <td class="border border-gray-300 px-4 py-2">{{ item.nombre }}</td>
-        <td class="border border-gray-300 px-4 py-2">{{ item.descripcion }}</td>
-        <td class="border border-gray-300 px-4 py-2">{{ item.precio }}</td>
-        <td class="border border-gray-300 px-4 py-2">{{ item.category_id }}</td>
-      </tr>
-    }
-  </tbody>
-</table>
+<!-- Carrusel o sección principal destacada (mock) -->
+<section class="bg-white py-6">
+  <div class="max-w-6xl mx-auto px-4">
+    <h2 class="text-xl font-bold mb-4 text-gray-800">Ofertas del día</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+      <!-- Artículos destacados -->
+      @for (item of productService.products(); track item.id) {
+
+      <div class="bg-gray-50 p-4 rounded-lg text-center hover:shadow-md transition">
+        <img src="" alt="Producto" class="mx-auto mb-2 w-24 h-24 object-contain" />
+        <h3 class="text-sm font-medium text-gray-800 truncate">{{item.nombre}}</h3>
+        <p class="text-red-600 font-bold text-sm">{{item.precio | currency:'USD'}}</p>
+        <p class="text-xs text-gray-500">+ envío</p>
+      </div>
+
+      }
+
+
+    </div>
+  </div>
+</section>
+
+<!-- Sección de categorías principales (opcional adicional) -->
+<section class="bg-white py-6 mt-4">
+  <div class="max-w-6xl mx-auto px-4">
+    <h2 class="text-xl font-bold mb-4 text-gray-800">Navega por categorías</h2>
+    <div class="grid grid-cols-3 md:grid-cols-6 gap-6 text-center">
+
+      @for (item of productService.categories(); track item.id) {
+
+
+      <a [routerLink]="['/category',item.id]" class="text-center hover:text-blue-600">
+        <div class="w-16 h-16 mx-auto mb-2 bg-blue-100 rounded-full flex items-center justify-center">
+          <i class="fas fa-mobile-alt text-blue-600"></i>
+        </div>
+        <span class="text-sm">{{item.nombre | titlecase}}</span>
+      </a>
+      }
+
+    </div>
+  </div>
+</section>
+
+<!-- Pie de página (simplificado) -->

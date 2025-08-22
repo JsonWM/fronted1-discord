@@ -7,24 +7,30 @@ import { CategoryResponse } from '../interfaces/category.interface';
 const API = "http://127.0.0.1:8000"
 
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class ProductsService {
+    constructor() {
+        this.getCategories();
+        this.getProducts()
+    }
     http = inject(HttpClient);
 
-    products = signal<ProductsResponse[]>([]);   
-    categories = signal<CategoryResponse[]>([]);   
+    products = signal<ProductsResponse[]>([]);
+    categories = signal<CategoryResponse[]>([]);
 
-    getProducts():Observable<ProductsResponse[]>{
-        return this.http.get<ProductsResponse[]>(`${API}/products/get_all`).pipe(tap(value => this.products.set(value)))
+    getProducts() {
+        return this.http.get<ProductsResponse[]>(`${API}/products/get_all`).subscribe(value => this.products.set(value))
     }
-    getCategories():Observable<CategoryResponse[]>{
-        return this.http.get<CategoryResponse[]>(`${API}/categories/get_all`).pipe(tap(value => this.categories.set(value)))
+    getCategories() {
+        return this.http.get<CategoryResponse[]>(`${API}/categories/get_all`).subscribe(value => {
+            this.categories.set(value)
+        })
     }
 
-    getProductsByCategory(id:number):Observable<ProductsResponse[]>{
+    getProductsByCategory(id: number): Observable<ProductsResponse[]> {
         return this.http.get<ProductsResponse[]>(`${API}/products/get_by_category/${id}`);
     }
 
-    
-    
+
+
 }
